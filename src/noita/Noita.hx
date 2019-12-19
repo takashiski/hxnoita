@@ -6,6 +6,7 @@ import noita.Entity;
 
 
 typedef ComponentId=Int;
+typedef VariableName=String;
 
 @:multiReturn extern class Transform
 {
@@ -33,10 +34,10 @@ extern class Noita
     public static function EntityLoadCameraBound( filename:String, ?pos_x:Int, ?pos_y:Int ):Void;
     //(note: works only in dev builds)
     public static function EntitySave( entity_id:Entity, filename:String ):Void;
-    public static function EntityCreateNew( ?name ):Entity;
+    public static function EntityCreateNew( ?name:String ):Entity;
     public static function EntityKill( entity_id:Entity ):Void;
     public static function EntityIsAlive( entity_id:Entity ):Bool;
-    public static function EntityAddComponent( entity_id:Entity, component_type_name, ?table_of_component_values ):ComponentId;
+    public static function EntityAddComponent( entity_id:Entity, component_type_name:String, ?table_of_component_values ):ComponentId;
     public static function EntityRemoveComponent( entity_id:Entity, component_id:ComponentId ):Void;
     public static function EntityGetAllComponents( entity_id:Entity ) -> {component_id};
     public static function EntityGetComponent( entity_id:Entity, component_type_name ) -> {component_id}|nil;
@@ -61,26 +62,26 @@ extern class Noita
     public static function EntityAddTag( entity_id:Entity, tag ):Void;
     public static function EntityRemoveTag( entity_id:Entity, tag ):Void;
     public static function EntityHasTag( entity_id:Entity, tag ):Bool;
-    public static function ComponentGetValue( component_id:ComponentId, variable_name ) -> string|nil;
-    public static function ComponentGetValueBool( component_id:ComponentId, variable_name ):Bool;
-    public static function ComponentGetValueInt( component_id:ComponentId, variable_name ) -> int;
-    public static function ComponentGetValueFloat( component_id:ComponentId, variable_name ) -> number;
-    public static function ComponentGetValueVector2( component_id:ComponentId, variable_name ) -> x,y;
+    public static function ComponentGetValue( component_id:ComponentId, variable_name:VariableName ) -> string|nil;
+    public static function ComponentGetValueBool( component_id:ComponentId, variable_name:VariableName ):Bool;
+    public static function ComponentGetValueInt( component_id:ComponentId, variable_name:VariableName ) -> int;
+    public static function ComponentGetValueFloat( component_id:ComponentId, variable_name:VariableName ) -> number;
+    public static function ComponentGetValueVector2( component_id:ComponentId, variable_name:VariableName ) -> x,y;
     public static function ComponentGetVectorSize( component_id:ComponentId, array_member_name, type_of_vector ) -> int;
     public static function ComponentGetVectorValue( component_id:ComponentId, array_name, type, i ) -> multiple return types|nil;
     public static function ComponentGetVector( component_id:ComponentId, array_name, type ) -> {multiple types}|nil;
-    public static function ComponentSetValue( component_id:ComponentId, variable_name, value ):Void;
-    public static function ComponentSetValueVector2( component_id:ComponentId, variable_name, x, y ):Void;
-    public static function ComponentSetValueValueRange( component_id:ComponentId, variable_name, min, max ):Void;
-    public static function ComponentSetValueValueRangeInt( component_id:ComponentId, variable_name, min, max ):Void;
-    public static function ComponentSetMetaCustom( component_id:ComponentId, variable_name, value ):Void;
-    public static function ComponentGetMetaCustom( component_id:ComponentId, variable_name ) -> string|nil;
+    public static function ComponentSetValue( component_id:ComponentId, variable_name:VariableName, value ):Void;
+    public static function ComponentSetValueVector2( component_id:ComponentId, variable_name:VariableName, x, y ):Void;
+    public static function ComponentSetValueValueRange( component_id:ComponentId, variable_name:VariableName, min, max ):Void;
+    public static function ComponentSetValueValueRangeInt( component_id:ComponentId, variable_name:VariableName, min, max ):Void;
+    public static function ComponentSetMetaCustom( component_id:ComponentId, variable_name:VariableName, value ):Void;
+    public static function ComponentGetMetaCustom( component_id:ComponentId, variable_name:VariableName ) -> string|nil;
     public static function ComponentGetMembers( component_id:ComponentId ) -> {string-string} [returns a string-indexed table of string];
-    public static function ComponentObjectGetValue( component_id:ComponentId, object_name, variable_name ) -> string|nil;
-    public static function ComponentObjectGetValueBool( component_id:ComponentId, object_name, variable_name ) -> string|nil;
-    public static function ComponentObjectGetValue( component_id:ComponentId, object_name, variable_name ) -> string|nil;
-    public static function ComponentObjectGetValue( component_id:ComponentId, object_name, variable_name ) -> string|nil;
-    public static function ComponentObjectSetValue( component_id:ComponentId, object_name, variable_name, value ):Void;
+    public static function ComponentObjectGetValue( component_id:ComponentId, object_name, variable_name:VariableName ) -> string|nil;
+    public static function ComponentObjectGetValueBool( component_id:ComponentId, object_name, variable_name:VariableName ) -> string|nil;
+    public static function ComponentObjectGetValue( component_id:ComponentId, object_name, variable_name:VariableName ) -> string|nil;
+    public static function ComponentObjectGetValue( component_id:ComponentId, object_name, variable_name:VariableName ) -> string|nil;
+    public static function ComponentObjectSetValue( component_id:ComponentId, object_name, variable_name:VariableName, value ):Void;
     public static function ComponentObjectGetMembers( component_id:ComponentId, object_name ) -> {string-string}|nil [returns a string-indexed table of string];
     public static function GetUpdatedEntityID():Entity;
     public static function GetUpdatedComponentID():ComponentId;
