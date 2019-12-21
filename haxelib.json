@@ -1,0 +1,13 @@
+{
+    "name": "hxnoita",
+    "url" : "https://github.com/takashiski/hxnoita/",
+    "license": "MIT",
+    "tags": ["lua", "gamemod","mod","noita"],
+    "description": "extern for noita modding lua",
+    "version": "1.0.0",
+    "classPath": "src/",
+    "releasenote": "Initial release, everything is working correctly.",
+    "contributors": ["takashiski"],
+    "dependencies": {
+    }
+  }
