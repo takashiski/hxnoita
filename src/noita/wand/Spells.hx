@@ -1,6 +1,6 @@
 package noita.wand;
 
-enum abstract Spells(String)
+enum abstract Spells(String)from String
 {
     var BURST_2;
 	var BURST_3;
@@ -191,4 +191,18 @@ enum abstract Spells(String)
 	var TOUCH_BLOOD;
 	var TOUCH_SMOKE;
 	var DESTRUCTION;
+	public inline function new(str:String)
+	{
+		this=str;
+	}
+	@:from
+	static public inline function fromString(str:String)
+	{
+		return new Spells(str);
+	}
+	@:to
+	public inline function toString()
+	{
+		return this;
+	}
 }
