@@ -48,10 +48,31 @@ enum abstract PerkList(String)
 	final EXTRA_KNOCKBACK;
 	final LOWER_SPREAD;
 	final BOUNCE;
-	final MYSTERY_EGGPLANT;
 	final EXTRA_PERK;
 	final PERKS_LOTTERY;
 	final GENOME_MORE_HATRED;
 	final GENOME_MORE_LOVE;
+	inline function new(str:String)
 
+	{
+
+		this=str;
+
+	}
+
+	@:from static public inline function fromString(str:String)
+
+	{
+
+		return new PerkList(str);
+
+	}
+
+	@:to public inline function toString()
+
+	{
+
+		return this;
+
+	}
 }
