@@ -1,0 +1,11 @@
+#-lib extype
+#-lua dist/init.lua
+#-cp src
+-lib hxnoita
+-cp resouces
+#-cp resouces
+#-lua dist/perk_generator.lua
+#-main PerkGenerator
+#-main Main
+#-cmd lua dist/out.lua
+-cmd haxe -lua dist/perk_generator.lua -main resouces/PerkGenerator

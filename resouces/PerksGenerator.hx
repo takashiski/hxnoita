@@ -25,8 +25,7 @@ class PerksGenerator
         final fh=Io.open("./src/hxnoita/PerkList.hx","w");
         final header ="enum abstract PerkList(String)\n{";
         fh.write(header);
-        //TODO:perk_list.lua内で宣言されているperk_list:Array<Perk>を操作してidを取り出す
-        //TODO:とりだしたidを `\tfinal {{id}}:String;\n`と書き出す 
+
         untyped __lua__("for key,value in pairs(perk_list) do");
         final perk:Perk = untyped (value);
         fh.write("\tfinal "+ perk.id+ ";\n");

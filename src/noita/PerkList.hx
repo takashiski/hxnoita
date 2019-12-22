@@ -1,4 +1,4 @@
-package hxnoita;
+package noita;
 enum abstract PerkList(String)
 {	final CRITICAL_HIT;
 	final BREATH_UNDERWATER;
