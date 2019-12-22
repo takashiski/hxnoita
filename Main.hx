@@ -19,8 +19,8 @@ class Main
         var perks = new Array<PerkList>();
         perks.push(PerkList.CRITICAL_HIT);
         perks.push(PerkList.EXTRA_MONEY);
+        perks.push(PerkList.EXTRA_HP);
         perks.push(PerkList.ATTRACT_ITEMS);
-        perks.push(PerkList.EXTRA_MONEY);
         perks.push(PerkList.HEARTS_MORE_EXTRA_HP);
         perks.push(PerkList.REMOVE_FOG_OF_WAR);
         perks.push(PerkList.EDIT_WANDS_EVERYWHERE);
