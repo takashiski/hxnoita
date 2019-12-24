@@ -2,5 +2,6 @@
 #-lua dist/init.lua
 #-main Main
 #-cmd lua dist/out.lua
+
 -cp src
 -cmd haxe -lua dist/init.lua -main Main -lib hxnoita -D lua-vanilla

@@ -32,6 +32,22 @@ class Main
             var perk_entity = Noita.perk_spawn(transform.x,transform.y,perk);
             Noita.perk_pickup(perk_entity,player_entity,Noita.EntityGetName(perk_entity),false,false);
         }
+
+
+        var inventory=Null;
+        var cape=Null;
+        var playerArm=Null;
+        final playerChildEntities=Noita.EntityGetAllChildren(player_entity);
+        if(playerChildEntities!=Null)
+        {
+            for(childEntity in playerChildEntities)
+            {
+                final childEntityName=EntityGetName(childEntity);
+                if(childEntityName=="inventory_quick")
+                {}
+
+            }
+        }
     }
     static function hasAlreadyRun(modName:String):Bool
     {
