@@ -7,6 +7,7 @@ import haxe.extern.EitherType;
 import lua.Table;
 
 
+
 typedef ComponentId=Int;
 typedef VariableName=String;
 
@@ -36,6 +37,17 @@ extern class Noita
     public static function EntityGetName(entity_id:Entity):String;
     public static function perk_spawn(x:Int,y:Int,perk_id:PerkList):Entity;
     public static function perk_pickup(entity_item:Entity,entity_who_picked:Entity,item_name:String,do_cosmetic_fx:Bool,kill_other_perks:Bool):Void;
+    public static function EntityGetAllChildren(player_entity:Entity):Table<Int,Entity>;
+    
+    //public static function GameKillInventoryItem( who_picks_up_entity_id:Entity, item_entity_id:Entity ):Void;
+    public static function GameKillInventoryItem( inventory_owner_entity_id:Entity, item_entity_id:Entity ):Void;
+    public static function EntityAddChild( parent_id:Entity, child_id:Entity ):Void;
+    public static function GamePrint( log_line:String ):Void;
+    public static function GamePrintImportant( title:String, description:String ):Void;
+
+
+
+
 
     public static function EntityLoad( filename:String, ?pos_x:Int, ?pos_y:Int ):Entity;
     public static function EntityLoadCameraBound( filename:String, ?pos_x:Int, ?pos_y:Int ):Void;
