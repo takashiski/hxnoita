@@ -1,4 +1,5 @@
 import lua.Lua;
+import lua.Table;
 import noita.Files;
 import noita.Noita;
 import noita.Flags;
@@ -11,12 +12,12 @@ import noita.wand.Spells;
 @:expose
 class Main
 {
-
     public static function OnPlayerSpawned(player_entity:Entity):Void
     {
         if(hasAlreadyRun("mod_test"))return;
         var transform = Noita.EntityGetTransform(player_entity);
         var perks = new Array<PerkList>();
+        perks.push(PerkList.GLASS_CANNON);
         perks.push(PerkList.CRITICAL_HIT);
         perks.push(PerkList.EXTRA_MONEY);
         perks.push(PerkList.EXTRA_HP);
@@ -33,21 +34,68 @@ class Main
             Noita.perk_pickup(perk_entity,player_entity,Noita.EntityGetName(perk_entity),false,false);
         }
 
-
-        var inventory=Null;
-        var cape=Null;
-        var playerArm=Null;
-        final playerChildEntities=Noita.EntityGetAllChildren(player_entity);
-        if(playerChildEntities!=Null)
+        Noita.GamePrint("init perks");
+        var inventory=null;
+        var cape=null;
+        var playerArm=null;
+        var playerChildEntities=Noita.EntityGetAllChildren(player_entity);
+        if(playerChildEntities!=null)
         {
-            for(childEntity in playerChildEntities)
+            Table.foreach(playerChildEntities,(i,childEntity)->
             {
-                final childEntityName=EntityGetName(childEntity);
+                final childEntityName=Noita.EntityGetName(childEntity);
+ //               untyped __lua__("GamePrint(childEntity)");
                 if(childEntityName=="inventory_quick")
-                {}
-
-            }
+                {
+                    inventory=childEntity;
+                    untyped __lua__("GamePrint(childEntity)");
+                }
+                if(childEntityName=="cape")
+                {
+                    cape=childEntity;
+                }
+                if(childEntityName=="arm_r")
+                {
+                    playerArm=childEntity;
+                }
+            });
         }
+        else 
+        {
+            Noita.GamePrint("player has no child");
+        }
+        if(inventory!=null)
+        {
+            final inventoryItems=Noita.EntityGetAllChildren(inventory);
+            if(inventoryItems!=null)
+            {
+                Table.foreach(inventoryItems,(i,item)->
+                {
+                    Noita.GameKillInventoryItem(player_entity,item);
+                    Noita.GamePrint("remove");
+                });
+            } 
+            final wand1=Noita.EntityLoad("data/entities/items/wands/wand_good/wand_good_1.xml");
+            Noita.EntityAddChild(inventory,wand1);
+            Noita.GamePrint("got wand1");
+            final wand2=Noita.EntityLoad("data/entities/items/wands/wand_good/wand_good_2.xml");
+            Noita.EntityAddChild(inventory,wand2);
+            Noita.GamePrint("got wand2");
+            final wand3=Noita.EntityLoad("data/entities/items/wands/wand_good/wand_good_3.xml");
+            Noita.EntityAddChild(inventory,wand3);
+            Noita.GamePrint("got wand3");
+            final item_entity1 = Noita.EntityLoad("data/entities/items/pickup/potion_water.xml");
+            Noita.EntityAddChild(inventory,item_entity1);
+            Noita.GamePrint("got water");
+            final item_entity2 = Noita.EntityLoad("data/entities/items/pickup/potion_water.xml");
+            Noita.EntityAddChild(inventory,item_entity2);
+            Noita.GamePrint("got water");
+        }			
+        else 
+        {
+            Noita.GamePrint("inventory is empty");
+        }
+        Noita.GamePrintImportant( "You got power!!!","by Mod" );
     }
     static function hasAlreadyRun(modName:String):Bool
     {
