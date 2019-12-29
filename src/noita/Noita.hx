@@ -2,28 +2,13 @@ package noita;
 import noita.Entity;
 import noita.Files;
 
-import haxe.extern.EitherType;
 
 import lua.Table;
 
 
 
-typedef ComponentId=Int;
-typedef VariableName=String;
 
-@:multiReturn extern class Transform
-{
-    var x:Int;
-    var y:Int;
-    var rotation:Int;
-    var scale_x:Int;
-    var scale_y:Int;
-}
 
-typedef Vector2={
-    var x:EitherType<Int,Float>;
-    var y:EitherType<Int,Float>;
-}
 @:native("_G")
 extern class Noita
 {
@@ -33,15 +18,10 @@ extern class Noita
     public static function ActionUsesRemainingChanged(inventoryitem_id:Int,uses_remaining:Int):Void;
     public static function GameHasFlagRun(flag:Flags):Bool;
     public static function GameAddFlagRun(flag:Flags):Void;
-    public static function EntityGetTransform(entity_id:Entity):Transform;
-    public static function EntityGetName(entity_id:Entity):String;
-    public static function perk_spawn(x:Int,y:Int,perk_id:PerkList):Entity;
-    public static function perk_pickup(entity_item:Entity,entity_who_picked:Entity,item_name:String,do_cosmetic_fx:Bool,kill_other_perks:Bool):Void;
-    public static function EntityGetAllChildren(player_entity:Entity):Table<Int,Entity>;
-    
-    //public static function GameKillInventoryItem( who_picks_up_entity_id:Entity, item_entity_id:Entity ):Void;
-    public static function GameKillInventoryItem( inventory_owner_entity_id:Entity, item_entity_id:Entity ):Void;
-    public static function EntityAddChild( parent_id:Entity, child_id:Entity ):Void;
+    public static function perk_spawn(x:Int,y:Int,perk_id:PerkList):EntityId;
+    public static function perk_pickup(entity_item:EntityId,entity_who_picked:EntityId,item_name:String,do_cosmetic_fx:Bool,kill_other_perks:Bool):Void;
+    //public static function GameKillInventoryItem( who_picks_up_entity_id:EntityId, item_entity_id:EntityId ):Void;
+    public static function GameKillInventoryItem( inventory_owner_entity_id:EntityId, item_entity_id:EntityId ):Void;
     public static function GamePrint( log_line:String ):Void;
     public static function GamePrintImportant( title:String, description:String ):Void;
 
@@ -49,42 +29,47 @@ extern class Noita
 
 
 
-    public static function EntityLoad( filename:String, ?pos_x:Int, ?pos_y:Int ):Entity;
+/*
+    public static function EntityGetTransform(entity_id:EntityId):Transform;
+    public static function EntityGetName(entity_id:EntityId):String;
+    public static function EntityLoad( filename:String, ?pos_x:Int, ?pos_y:Int ):EntityId;
     public static function EntityLoadCameraBound( filename:String, ?pos_x:Int, ?pos_y:Int ):Void;
     //(note: works only in dev builds)
-    public static function EntitySave( entity_id:Entity, filename:String ):Void;
-    public static function EntityCreateNew( ?name:String ):Entity;
-    public static function EntityKill( entity_id:Entity ):Void;
-    public static function EntityIsAlive( entity_id:Entity ):Bool;
+    public static function EntitySave( entity_id:EntityId, filename:String ):Void;
+    public static function EntityCreateNew( ?name:String ):EntityId;
+    public static function EntityKill( entity_id:EntityId ):Void;
+    public static function EntityIsAlive( entity_id:EntityId ):Bool;
+    */
+
     /*
-    public static function EntityAddComponent( entity_id:Entity, component_type_name:String, ?table_of_component_values ):ComponentId;
-    public static function EntityRemoveComponent( entity_id:Entity, component_id:ComponentId ):Void;
+    public static function EntityAddComponent( entity_id:EntityId, component_type_name:String, ?table_of_component_values ):ComponentId;
+    public static function EntityRemoveComponent( entity_id:EntityId, component_id:ComponentId ):Void;
 
 
-    public static function EntityGetAllComponents( entity_id:Entity ):Array<ComponentId>;
-    public static function EntityGetComponent( entity_id:Entity, component_type_name ):Null<Array<ComponentId>>;
-    public static function EntityGetFirstComponent( entity_id:Entity, component_type_name, ?tag:String):ComponentId;
-    public static function EntitySetTransform( entity_id:Entity, x, ?y, ?rotation, ?scale_x, ?scale_y ):Void;
-    public static function EntityGetTransform( entity_id:Entity ):Transform;
+    public static function EntityGetAllComponents( entity_id:EntityId ):Array<ComponentId>;
+    public static function EntityGetComponent( entity_id:EntityId, component_type_name ):Null<Array<ComponentId>>;
+    public static function EntityGetFirstComponent( entity_id:EntityId, component_type_name, ?tag:String):ComponentId;
+    public static function EntitySetTransform( entity_id:EntityId, x, ?y, ?rotation, ?scale_x, ?scale_y ):Void;
+    public static function EntityGetTransform( entity_id:EntityId ):Transform;
     public static function EntityAddChild( parent_id, child_id ):Void;
-    public static function EntityGetAllChildren( entity_id:Entity ):Null<Array<Entity>>;
-    public static function EntityGetParent( entity_id:Entity ):Entity;
-    public static function EntityRemoveFromParent( entity_id:Entity ):Void;
-    public static function EntitySetComponentsWithTagEnabled( entity_id:Entity, tag, enabled ):Void;
-    public static function EntitySetComponentIsEnabled( entity_id:Entity, component_id:ComponentId, is_enabled ):Void;
-    public static function EntityGetName( entity_id:Entity ):String;
-    public static function EntitySetName( entity_id:Entity, name ):Void;
+    public static function EntityGetAllChildren( entity_id:EntityId ):Null<Array<Entity>>;
+    public static function EntityGetParent( entity_id:EntityId ):EntityId;
+    public static function EntityRemoveFromParent( entity_id:EntityId ):Void;
+    public static function EntitySetComponentsWithTagEnabled( entity_id:EntityId, tag, enabled ):Void;
+    public static function EntitySetComponentIsEnabled( entity_id:EntityId, component_id:ComponentId, is_enabled ):Void;
+    public static function EntityGetName( entity_id:EntityId ):String;
+    public static function EntitySetName( entity_id:EntityId, name ):Void;
     // [string is comma separated];
-    public static function EntityGetTags( entity_id:Entity ):Null<String>;
-    public static function EntityGetWithTag( entity_tag:String):Entity;
-    public static function EntityGetInRadius( pos_x:Int, pos_y:Int, radius ):Entity;
-    public static function EntityGetInRadiusWithTag( pos_x:Int, pos_y:Int, radius, entity_tag:String):Entity;
-    public static function EntityGetClosest( pos_x:Int, pos_y:Int ):Entity;
-    public static function EntityGetClosestWithTag( pos_x:Int, pos_y:Int, tag:String ):Entity;
-    public static function EntityGetWithName( name ):Entity;
-    public static function EntityAddTag( entity_id:Entity, tag:String):Void;
-    public static function EntityRemoveTag( entity_id:Entity, tag:String):Void;
-    public static function EntityHasTag( entity_id:Entity, tag:String):Bool;
+    public static function EntityGetTags( entity_id:EntityId ):Null<String>;
+    public static function EntityGetWithTag( entity_tag:String):EntityId;
+    public static function EntityGetInRadius( pos_x:Int, pos_y:Int, radius ):EntityId;
+    public static function EntityGetInRadiusWithTag( pos_x:Int, pos_y:Int, radius, entity_tag:String):EntityId;
+    public static function EntityGetClosest( pos_x:Int, pos_y:Int ):EntityId;
+    public static function EntityGetClosestWithTag( pos_x:Int, pos_y:Int, tag:String ):EntityId;
+    public static function EntityGetWithName( name ):EntityId;
+    public static function EntityAddTag( entity_id:EntityId, tag:String):Void;
+    public static function EntityRemoveTag( entity_id:EntityId, tag:String):Void;
+    public static function EntityHasTag( entity_id:EntityId, tag:String):Bool;
     public static function ComponentGetValue( component_id:ComponentId, variable_name:VariableName ):Null<String>;
     public static function ComponentGetValueBool( component_id:ComponentId, variable_name:VariableName ):Bool;
     public static function ComponentGetValueInt( component_id:ComponentId, variable_name:VariableName ):Int;
@@ -106,21 +91,21 @@ extern class Noita
     public static function ComponentObjectGetValue( component_id:ComponentId, object_name, variable_name:VariableName ):Null<String>;
     public static function ComponentObjectSetValue( component_id:ComponentId, object_name, variable_name:VariableName, value ):Void;
     public static function ComponentObjectGetMembers( component_id:ComponentId, object_name ) -> {string-string}|nil [returns a string-indexed table of string];
-    public static function GetUpdatedEntityID():Entity;
+    public static function GetUpdatedEntityID():EntityId;
     public static function GetUpdatedComponentID():ComponentId;
     public static function RegisterSpawnFunction( uint32 color, string function_name ):Void;
     public static function SpawnActionItem( x, y, level ):Void;
-    public static function SpawnStash( x, y, level, action_count ):Entity;
+    public static function SpawnStash( x, y, level, action_count ):EntityId;
     public static function SpawnApparition( x, y, level ):Int,entity_id;
     public static function LoadEntityToStash( entity_file, stash_id ):Void;
-    public static function AddMaterialInventoryMaterial( entity_id:Entity, material_name, count ):Void;
+    public static function AddMaterialInventoryMaterial( entity_id:EntityId, material_name, count ):Void;
     public static function GameScreenshake( strength, ?pos_x:Int, ?pos_y:Int ):Void;
     public static function GameOnCompleted():Void;
     public static function GameDoEnding2():Void;
     public static function GameIsIntroPlaying():Bool;
     public static function GameGetIsGamepadConnected():Bool;
-    public static function GameGetWorldStateEntity():Entity;
-    public static function GameGetPlayerStatsEntity():Entity;
+    public static function GameGetWorldStateEntity():EntityId;
+    public static function GameGetPlayerStatsEntity():EntityId;
     public static function GameGetOrbCountAllTime():Int;
     public static function GameGetOrbCountThisRun():Int;
     public static function GameGetOrbCollectedThisRun( int orb_id_zero_based ):Bool;
@@ -135,26 +120,26 @@ extern class Noita
     public static function GameGetCameraPos():Vector2;
     public static function GameSetCameraPos( x, y ):Void;
     public static function GameSetCameraFree( is_free ):Void;
-    public static function GameRegenItemAction( entity_id:Entity ):Void;
-    public static function GameRegenItemActionsInContainer( entity_id:Entity ):Void;
-    public static function GameRegenItemActionsInPlayer( entity_id:Entity ):Void;
+    public static function GameRegenItemAction( entity_id:EntityId ):Void;
+    public static function GameRegenItemActionsInContainer( entity_id:EntityId ):Void;
+    public static function GameRegenItemActionsInPlayer( entity_id:EntityId ):Void;
     public static function GameKillInventoryItem( inventory_owner_entity_id, item_entity_id ):Void;
     public static function GameKillInventoryItem( who_picks_up_entity_id, item_entity_id ):Void;
-    public static function GameDropAllItems( entity_id:Entity ):Void;
+    public static function GameDropAllItems( entity_id:EntityId ):Void;
     public static function LoadPixelScene( string materials_filename:String, string colors_filename:String, x, y, string background_file, skip_biome_checks = false, skip_edge_textures = false, color_to_material_table = {} ):Void;
     public static function GameCreateParticle( string material_name, x, y, how_many, xvel, yvel, just_visual, ?draw_as_long ):Void;
     public static function GameShootProjectile( who_shot, x, y, target_x, target_y, projectile_entity, send_message ):Void;
-    public static function GamePlayAnimation( entity_id:Entity, name, priority, [followup_name], [followup_priority] ):Void;
-    public static function GameGetVelocityCompVelocity( entity_id:Entity ):Vector2;
-    public static function GameGetGameEffect( entity_id:Entity, string GAME_EFFECT ):ComponentId;
-    public static function GameGetGameEffectCount( entity_id:Entity, string GAME_EFFECT ) -> uint;
+    public static function GamePlayAnimation( entity_id:EntityId, name, priority, [followup_name], [followup_priority] ):Void;
+    public static function GameGetVelocityCompVelocity( entity_id:EntityId ):Vector2;
+    public static function GameGetGameEffect( entity_id:EntityId, string GAME_EFFECT ):ComponentId;
+    public static function GameGetGameEffectCount( entity_id:EntityId, string GAME_EFFECT ) -> uint;
     public static function SetPlayerSpawnLocation( x, y ):Void;
     public static function UnlockItem( action_id ):Void;
-    public static function GameGetPotionColor( entity_id:Entity ) -> uint;
+    public static function GameGetPotionColor( entity_id:EntityId ) -> uint;
     public static function Raytrace( x1, y1, x2, y2 ) -> did_hit,hit_x,hit_y;
     public static function FindFreePositionForBody( ideal_pos_x:Int, idea_pos_y:Int, velocity_x, velocity_y, body_radius ):Vector2;
     public static function GetSurfaceNormal( pos_x:Int, pos_y:Int, ray_length, ray_count ) -> found_normal,normal_x,normal_y,approximate_distance_from_surface;
-    public static function GenomeSetHerdId( entity_id:Entity, string new_herd_id ):Void;
+    public static function GenomeSetHerdId( entity_id:EntityId, string new_herd_id ):Void;
     public static function GamePrint( string log_line ):Void;
     public static function GamePrintImportant( string title, description ):Void;
     public static function DEBUG_GetMouseWorld():Vector2;
@@ -171,7 +156,7 @@ extern class Noita
     public static function StatsBiomeGetValue( key ):String;
     public static function StatsBiomeReset():Void;
     public static function StatsLogPlayerKill():Void;
-    public static function CreateItemActionEntity( action_id, ?x, ?y ):Entity;
+    public static function CreateItemActionEntity( action_id, ?x, ?y ):EntityId;
     public static function GetRandomActionWithType( x, y, max_level, type, i = 0):String;
     public static function BiomeMapSetSize( w, h )
     // [This is available if BIOME_MAP in magic_numbers.xml points to a lua file, in the context of that file.];
@@ -193,21 +178,21 @@ extern class Noita
     public static function ProceduralRandom( x, y, (min,max) ):Int|number [See Random() documentation.];
     public static function RandomDistribution( min, max, mean, (sharpness=1.f), (baseline=0.005) ):Int;
     public static function RandomDistributionf( min, max, mean, (sharpness=1.f), (baseline=0.005) ):Float;
-    public static function PhysicsAddBodyImage( entity_id:Entity, image_file, material = "", offset_x = 0, offset_y = 0, bool centered = false, bool is_circle = false, material_image_file = "" ):Int_body_id;
-    public static function PhysicsAddBodyImage( entity_id:Entity, material, offset_x, offset_y, width, height, bool centered = false ):Int_body_id|nil;
-    public static function PhysicsAddJoint( entity_id:Entity, body_id0, body_id1, offset_x, offset_y, string joint_type ):Int_joint_id;
-    public static function PhysicsApplyForce( entity_id:Entity, float force_x, float force_y ):Void;
-    public static function PhysicsApplyTorque( entity_id:Entity, float torque ):Void;
-    public static function PhysicsApplyTorqueToComponent( entity_id:Entity, component_id:ComponentId, float torque ):Void;
+    public static function PhysicsAddBodyImage( entity_id:EntityId, image_file, material = "", offset_x = 0, offset_y = 0, bool centered = false, bool is_circle = false, material_image_file = "" ):Int_body_id;
+    public static function PhysicsAddBodyImage( entity_id:EntityId, material, offset_x, offset_y, width, height, bool centered = false ):Int_body_id|nil;
+    public static function PhysicsAddJoint( entity_id:EntityId, body_id0, body_id1, offset_x, offset_y, string joint_type ):Int_joint_id;
+    public static function PhysicsApplyForce( entity_id:EntityId, float force_x, float force_y ):Void;
+    public static function PhysicsApplyTorque( entity_id:EntityId, float torque ):Void;
+    public static function PhysicsApplyTorqueToComponent( entity_id:EntityId, component_id:ComponentId, float torque ):Void;
     public static function PhysicsRemoveJoints( world_pos_min_x, world_pos_min_y, world_pos_max_x, world_pos_max_y  ):Void;
-    public static function PhysicsSetStatic( entity_id:Entity, bool is_static ):Void;
-    public static function PhysicsGetComponentVelocity( entity_id:Entity, component_id:ComponentId ) -> vel_x,vel_y;
-    public static function PhysicsGetComponentAngularVelocity( entity_id:Entity, component_id:ComponentId ) -> vel;
+    public static function PhysicsSetStatic( entity_id:EntityId, bool is_static ):Void;
+    public static function PhysicsGetComponentVelocity( entity_id:EntityId, component_id:ComponentId ) -> vel_x,vel_y;
+    public static function PhysicsGetComponentAngularVelocity( entity_id:EntityId, component_id:ComponentId ) -> vel;
     public static function PhysicsVecToGameVec( x, ?y ):Vector2;
     public static function GameVecToPhysicsVec( x, ?y ):Vector2;
     public static function LooseChunk( world_pos_x:Int, world_pos_y:Int, image_filename:String, ? max_durability ):Void;
-    public static function LoadGameEffectEntityTo( entity_id:Entity, string game_effect_entity_file ) -> effect_entity_id;
-    public static function GetGameEffectLoadTo( entity_id:Entity, string game_effect_entity_file, always_load_new ) -> effect_component_id;
+    public static function LoadGameEffectEntityTo( entity_id:EntityId, string game_effect_entity_file ) -> effect_entity_id;
+    public static function GetGameEffectLoadTo( entity_id:EntityId, string game_effect_entity_file, always_load_new ) -> effect_component_id;
     public static function AddFlagPersistent( key ):Bool_is_new;
     public static function RemoveFlagPersistent( key ):Void;
     public static function HasFlagPersistent( key ):Bool;
@@ -237,7 +222,7 @@ extern class Noita
     public static function GameGetIsTrailerModeEnabled():Bool;
     // [This doesn't do anything at the moment.];
     public static function Debug_SaveTestPlayer():Void;;
-    public static function EntityConvertToMaterial( entity_id:Entity, string material ):Void;
+    public static function EntityConvertToMaterial( entity_id:EntityId, string material ):Void;
     public static function ConvertEverythingToGold():Void;
     public static function ModLuaFileAppend( to_filename:String, from_filename:String ):Void;
     public static function ModMagicNumbersFileAdd( filename:String ):Void;
