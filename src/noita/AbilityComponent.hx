@@ -3,8 +3,8 @@ package noita;
 //todo:asign correct type(string)
 typedef AbilityComponent={
   var cooldown_frames:Int;
-  var entity_file:Int;
-  var sprite_file:Int;
+  var entity_file:String;
+  var sprite_file:String;
   var entity_count:Int;
   var never_reload:Int;
   var reload_time_frames:Int;
@@ -22,7 +22,7 @@ typedef AbilityComponent={
   var item_recoil_max:Int;
   var item_recoil_offset_coeff:Int;
   var item_recoil_rotation_coeff:Int;
-  var base_item_file:Int;
+  var base_item_file:String;
   var use_entity_file_as_projectile_info_proxy:Int;
   var shooting_reduces_amount_in_inventory:Int;
   var throw_as_item:Int;
@@ -30,12 +30,12 @@ typedef AbilityComponent={
   var max_amount_in_inventory:Int;
   var amount_in_inventory:Int;
   var drop_as_item_on_death:Int;
-  var ui_name:Int;
-  var use_gun_script:Int;
+  var ui_name:String;
+  var use_gun_script:String;
   var is_petris_gun:Int;
   var add_these_child_actions:Int;
   var current_slot_durability:Int;
-  var slot_consumption_function:Int;
+  var slot_consumption_function:String;
   var mChargeCount:Int;
   var mIsInitialized:Int;
 }
