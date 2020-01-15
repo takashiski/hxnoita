@@ -6,7 +6,6 @@ import noita.Types;
 
 
 
-typedef EntityId=Null<Int>;
 @:native("_G")
 
 extern class Entity

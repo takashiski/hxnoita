@@ -16,3 +16,8 @@ typedef Vector2={
     var x:EitherType<Int,Float>;
     var y:EitherType<Int,Float>;
 }
+typedef Apparition={
+    var integer:Int;
+    var entityId:EntityId;
+}
+typedef EntityId=Null<Int>;
