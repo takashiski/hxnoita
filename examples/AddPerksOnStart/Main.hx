@@ -7,6 +7,7 @@ import noita.Entity;
 import noita.PerkList;
 import noita.EventFunctions;
 import noita.wand.Spells;
+import noita.Types;
 
 
 @:expose

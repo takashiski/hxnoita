@@ -1,0 +1,6 @@
+-lua dist/AddItemsOnStart/init.lua
+-lib hxnoita
+-cp examples/AddItemsOnStart
+-main Main
+-D lua-vanilla
+-cmd cp C:/Users/takashi/git/hxnoita/dist/AddItemsOnStart/init.lua "C:/Program Files (x86)/Steam/steamapps/common/Noita/mods/AddItemsOnStart"

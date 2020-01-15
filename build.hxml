@@ -2,6 +2,16 @@
 #-lua dist/init.lua
 #-main Main
 #-cmd lua dist/out.lua
-
+examples/AddItemsOnStart/build.hxml
+--next
+examples/AddPerksOnStart/build.hxml
+--next
 -cp src
--cmd haxe -lua dist/init.lua -main Main -lib hxnoita -D lua-vanilla
+#-lua dummy
+-lib hxnoita
+-lua dist/init.lua
+-main Main
+-D lua-vanilla
+#-cmd haxe -lua dist/init.lua -main Main -lib hxnoita -D lua-vanilla
+-cmd cp ./dist/init.lua "C:/Program Files (x86)/Steam/steamapps/common/Noita/mods/testmod001"
+

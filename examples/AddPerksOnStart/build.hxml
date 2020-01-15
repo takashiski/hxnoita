@@ -1,0 +1,7 @@
+
+-lua dist/AddPerksOnStart/init.lua
+-lib hxnoita
+-cp examples/AddPerksOnStart
+-main Main
+-D lua-vanilla
+-cmd cp C:/Users/takashi/git/hxnoita/dist/AddPerksOnStart/init.lua "C:/Program Files (x86)/Steam/steamapps/common/Noita/mods/AddPerksOnStart"
