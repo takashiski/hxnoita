@@ -1,4 +1,5 @@
 import Xml;
+import js.node.Fs;
 
 class ModInit
 {
@@ -7,6 +8,8 @@ class ModInit
         root.set("name","mod name");
         root.set("description","mod description");
         root.set("request_no_api_restrictions","0");
+        
         trace(root);
+        Fs.writeFile("./test.xml",entity.toString(),(err)->{trace(err);});
     }
 }

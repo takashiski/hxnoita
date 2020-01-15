@@ -1,0 +1,5 @@
+-lib hxnodejs
+-js dist/xml.js
+-main ModInit
+-D lua-vanilla
+-cmd node dist/xml.js
