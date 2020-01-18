@@ -17,8 +17,8 @@ extern class Noita
     public static function dofile_once(filepath:Files):Void;
     public static function ActionUsed(inventoryitem_id:Int):Void;
     public static function ActionUsesRemainingChanged(inventoryitem_id:Int,uses_remaining:Int):Void;
-    public static function GameHasFlagRun(flag:Flags):Bool;
-    public static function GameAddFlagRun(flag:Flags):Void;
+    //public static function GameHasFlagRun(flag:Flags):Bool;
+    //public static function GameAddFlagRun(flag:Flags):Void;
     public static function perk_spawn(x:Int,y:Int,perk_id:PerkList):EntityId;
     public static function perk_pickup(entity_item:EntityId,entity_who_picked:EntityId,item_name:String,do_cosmetic_fx:Bool,kill_other_perks:Bool):Void;
     //public static function GameKillInventoryItem( who_picks_up_entity_id:EntityId, item_entity_id:EntityId ):Void;
@@ -192,19 +192,21 @@ extern class Noita
     public static function LooseChunk( world_pos_x:Int, world_pos_y:Int, image_filename:String, ? max_durability ):Void;
     public static function LoadGameEffectEntityTo( entity_id:EntityId, string game_effect_entity_file ) -> effect_entity_id;
     public static function GetGameEffectLoadTo( entity_id:EntityId, string game_effect_entity_file, always_load_new ) -> effect_component_id;
-    public static function AddFlagPersistent( key ):Bool_is_new;
-    public static function RemoveFlagPersistent( key ):Void;
-    public static function HasFlagPersistent( key ):Bool;
-    public static function GameAddFlagRun( flag ):Void;
-    public static function GameRemoveFlagRun( flag ):Void;
-    public static function GameHasFlagRun( flag ):Bool;
-    public static function GameTriggerMusicEvent( event_path, can_be_faded, x:Int, y ):Void;
-    public static function GameTriggerMusicCue( name ):Void;
-    public static function GameTriggerMusicFadeOutAndDequeueAll( ?relative_fade_speed ):Void;
-    public static function GamePlaySound( bank_filename:String, event_path, x:Int, y ):Void;
-    public static function GameEntityPlaySound( entity:Int, event_name ):Void;
-    public static function GameTextGetTranslatedOrNot( text_or_key ):String;
-    public static function GameTextGet( key:Int, ? param0, ? param1, ? param2 ):String;
+    */
+    public static function AddFlagPersistent( key:String ):Bool;
+    public static function RemoveFlagPersistent( key:String ):Void;
+    public static function HasFlagPersistent( key:String ):Bool;
+    public static function GameAddFlagRun( flag:String ):Void;
+    public static function GameRemoveFlagRun( flag:String ):Void;
+    public static function GameHasFlagRun( flag:String ):Bool;
+    public static function GameTriggerMusicEvent( event_path:String, can_be_faded:Bool, x:Int, y:Int ):Void;
+    public static function GameTriggerMusicCue( name:String ):Void;
+    public static function GameTriggerMusicFadeOutAndDequeueAll( ?relative_fade_speed:Int ):Void;
+    public static function GamePlaySound( bank_filename:String, event_path:String, x:Int, y:Int ):Void;
+    public static function GameEntityPlaySound( entity:Int, event_name:String ):Void;
+    public static function GameTextGetTranslatedOrNot( text_or_key:String ):String;
+    public static function GameTextGet( key:String, ? param0:String, ? param1:String, ? param2:String ):String;
+    /*
     public static function GuiCreate() -> gui;
     public static function GuiDestroy( gui ):Void;
     public static function GuiStartFrame( gui ):Void;

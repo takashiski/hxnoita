@@ -1,6 +1,7 @@
 package noita.gun.procedural;
 
-import noita.Entity.EntityId;
+import noita.Types;
+import noita.Entity;
 import noita.wand.Spells;
 
 typedef ActionId=Spells;
