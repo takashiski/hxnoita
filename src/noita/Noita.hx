@@ -3,6 +3,7 @@ import noita.Entity;
 import noita.Files;
 import noita.Component;
 import noita.Types;
+import noita.Gui.GuiObject;
 
 import lua.Table;
 
@@ -206,18 +207,18 @@ extern class Noita
     public static function GameEntityPlaySound( entity:Int, event_name:String ):Void;
     public static function GameTextGetTranslatedOrNot( text_or_key:String ):String;
     public static function GameTextGet( key:String, ? param0:String, ? param1:String, ? param2:String ):String;
+    public static function GuiCreate():GuiObject;
+    public static function GuiDestroy( gui:GuiObject ):Void;
+    public static function GuiStartFrame( gui:GuiObject ):Void;
+    public static function GuiText( gui:GuiObject, x:Int, y:Int, text:String ):Void;
+    public static function GuiTextCentered( gui:GuiObject, x:Int, y:Int, text:String ):Void;
+    public static function GuiButton( gui:GuiObject, x:Int, y:Int, text:String, id:Int ):Bool;
+    public static function GuiLayoutBeginHorizontal( gui:GuiObject, x_rel:Int, y_rel:Int ):Void;
+    public static function GuiLayoutBeginVertical( gui:GuiObject, x_rel:Int, y_rel:Int  ):Void;
+    public static function GuiLayoutAddHorizontalSpacing( gui:GuiObject ):Void;
+    public static function GuiLayoutAddVerticalSpacing( gui:GuiObject ):Void;
+    public static function GuiLayoutEnd( gui:GuiObject ):Void;
     /*
-    public static function GuiCreate() -> gui;
-    public static function GuiDestroy( gui ):Void;
-    public static function GuiStartFrame( gui ):Void;
-    public static function GuiText( gui, x:Int, y:Int, text ):Void;
-    public static function GuiTextCentered( gui, x:Int, y:Int, text ):Void;
-    public static function GuiButton( gui, x:Int, y:Int, text, id ):Bool_clicked;
-    public static function GuiLayoutBeginHorizontal( gui, x_rel, y_rel ):Void;
-    public static function GuiLayoutBeginVertical( gui, x_rel, y_rel  ):Void;
-    public static function GuiLayoutAddHorizontalSpacing( gui ):Void;
-    public static function GuiLayoutAddVerticalSpacing( gui ):Void;
-    public static function GuiLayoutEnd( gui ):Void;
     public static function DebugGetIsDevBuild():Bool;
     public static function DebugEnableTrailerMode():Void;
     public static function GameGetIsTrailerModeEnabled():Bool;
